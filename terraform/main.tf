@@ -50,3 +50,25 @@ resource "aws_apigatewayv2_integration" "trivia_integration" {
   integration_uri  = aws_lambda_function.trivia.invoke_arn
   payload_format_version = "2.0"
 }
+
+resource "aws_apigatewayv2_route" "trivia_route" {
+  api_id    = aws_apigatewayv2_api.trivia_api.id
+  route_key = "GET /trivia"
+  target    = "integrations/${aws_apigatewayv2_integration.trivia_integration.id}"
+}
+
+# Deploy API Gateway
+resource "aws_apigatewayv2_stage" "default_stage" {
+  api_id      = aws_apigatewayv2_api.trivia_api.id
+  name        = "$default"
+  auto_deploy = true
+}
+
+# Grant permission for API Gateway to invoke the Lambda
+resource "aws_lambda_permission" "apigw" {
+  statement_id  = "AllowAPIGatewayInvoke"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.trivia.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.trivia_api.execution_arn}/*/*"
+}
