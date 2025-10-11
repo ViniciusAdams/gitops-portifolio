@@ -17,17 +17,12 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1   # change to your region
-
-      - name: Test Secrets Masking
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}"
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          aws-region: eu-west-1
 
       - name: Sync files to S3
-        run: aws s3 sync . s3://YOUR_BUCKET_NAME --delete
+        run: aws s3 sync ./ s3://viniciusadams.com --delete --exclude ".github/*" --exclude ".gitignore"
 
       - name: Invalidate CloudFront cache
         run: aws cloudfront create-invalidation \
-              --distribution-id YOUR_DISTRIBUTION_ID \
+              --distribution-id E3NC37RZFNJ40V \
               --paths "/*"
