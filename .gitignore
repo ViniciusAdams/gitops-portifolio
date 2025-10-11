@@ -1,0 +1,19 @@
+# Environment / secret files
+.env
+.env.local
+.env.*.local
+
+# Node modules (if you have them from build process)
+node_modules/
+
+# Build artifacts (if you rebuild site locally)
+build/
+dist/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary editor files
+*.swp
+*.swo
