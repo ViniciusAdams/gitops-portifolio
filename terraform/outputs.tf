@@ -1,6 +1,6 @@
 output "api_endpoint" {
-  value       = aws_apigatewayv2_api.trivia_api_endpoint
   description = "Base URL of the deployed API"
+  value       = aws_apigatewayv2_api.trivia_api.api_endpoint
 }
 
 output "lambda_api_url" {
