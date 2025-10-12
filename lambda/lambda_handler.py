@@ -1,7 +1,7 @@
 import json
 import random
 
-# Simple list of Python trivia questions
+# Simple list of Python trivia questions, dummy
 QUESTIONS = [
     {"id": "q1", "q": "What keyword is used to define a function in Python?", "a": "def"},
     {"id": "q2", "q": "What is the output of len('hello')?", "a": "5"},
