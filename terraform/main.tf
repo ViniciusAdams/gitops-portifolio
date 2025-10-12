@@ -39,7 +39,7 @@ resource "aws_lambda_function" "trivia" {
   role          = aws_iam_role.lambda_role.arn
 }
 
-resource "aws_apigatewayv2_api" "http_api" {
+resource "aws_apigatewayv2_api" "trivia_api" {
   name          = "TriviaGameAPI"
   protocol_type = "HTTP"
 }
